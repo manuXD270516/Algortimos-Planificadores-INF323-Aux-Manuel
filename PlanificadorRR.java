@@ -81,4 +81,12 @@ class PlanficadorRR{
         return p;
     }
     
+    // EXAMEN PRIMER PARCIAL SC (2/2016) pregunta 2
+    int cont=0;
+    void planificador_1parcial_Sc_2_2016_q2(){
+        cont++;
+        if (cont==PRUN.c){
+            
+        }
+    }
 }
