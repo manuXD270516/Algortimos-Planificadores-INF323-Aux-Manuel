@@ -15,6 +15,8 @@ class PlanficadorRR{
     Cola Q=new Cola(); // cola Q
     PCB PRUN=new PCB();
 
+    // PCB's guardados en un vector (mesa examinadora sem 5-2016)
+    PCB[] V=new PCB[N];
 
     // EXAMEN PRIMER PARCIAL SA (1/2018) PREGUNTA 3
     // DEQUE (COLA MODIFICADA)
@@ -86,7 +88,41 @@ class PlanficadorRR{
     void planificador_1parcial_Sc_2_2016_q2(){
         cont++;
         if (cont==PRUN.c){
-            
+            PRUN.c--;
+            PRUN.Reg=CPU.Reg;
+            if (PRUN.c==0){
+                FreeMem(PRUN);
+            } else {
+                Q.meter(PRUN);
+            }
+            PRUN=Q.sacar();
+            cont=0;
+            CPU.Reg=PRUN.Reg;
         }
+    }
+
+    // EXAMEN MESA EXAMINADORA SM (5/2016) pregunta 1
+    int cont=0; 
+    int k=0; // indice de posiciones en el vector de procesos
+    void planificador_mesa_SM_5_2016_q1(){
+        cont++;
+        if (cont==getQByVectorPCB(k)||PRUN.PID==-1){
+            if (PRUN.PID==-1){
+                FreeMem(PRUN);
+            } else {
+                PRUN.Reg=CPU.Reg;
+            }
+            PRUN=V[k];
+            k=nextPos(k);
+            cont=0;
+            CPU.Reg=PRUN.Reg;
+        }
+    }
+
+    int getQByVectorPCB(int i){
+        if (i%2==0){
+            return 2;
+        }
+        return 1;
     }
 }
